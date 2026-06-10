@@ -1,0 +1,18 @@
+{
+  "name": "nexura-labs-storefront",
+  "version": "1.0.0",
+  "description": "Premium storefront for Nexura Labs materials and equipment.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 3000 -c-1",
+    "start": "npx http-server -p 3000 -c-1"
+  },
+  "keywords": [
+    "nexura-labs",
+    "storefront",
+    "biomolecular",
+    "chemistry"
+  ],
+  "author": "Nexura Labs Development",
+  "license": "ISC"
+}

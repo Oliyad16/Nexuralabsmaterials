@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexura Labs Materials</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo" id="logoLink">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.5 3h15" />
+          <path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3" />
+          <path d="M6 14h12" />
+          <circle cx="12" cy="9" r="1.5" />
+          <circle cx="10" cy="17" r="1" />
+          <circle cx="14" cy="17" r="1" />
+        </svg>
+        <span>Nexura Labs</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-links" aria-label="Main Navigation">
+        <ul>
+          <li><a href="#catalogAnchor" class="active">Storefront</a></li>
+          <li><a href="#sdsSearchInput">GHS & Safety</a></li>
+          <li><a href="#procurementAnchor">B2B Requisition</a></li>
+          <li><a href="mailto:procurement@nexuralabs.com">Request Quote</a></li>
+        </ul>
+      </nav>
+
+      <search class="search-box">
+        <label for="searchInput" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Search materials, reagents, equipment...</label>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input type="search" id="searchInput" placeholder="Search reagents, CAS, formula...">
+      </search>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn" class="btn-icon" aria-label="Toggle light and dark theme">
+          <svg id="themeDarkIcon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          </svg>
+          <svg id="themeLightIcon" class="theme-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2"/>
+            <path d="M12 20v2"/>
+            <path d="m4.93 4.93 1.41 1.41"/>
+            <path d="m17.66 17.66 1.41 1.41"/>
+            <path d="M2 12h2"/>
+            <path d="M20 12h2"/>
+            <path d="m6.34 17.66-1.41 1.41"/>
+            <path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+        </button>
+
+        <!-- Cart Trigger -->
+        <div class="cart-btn-wrapper">
+          <button id="cartToggleBtn" class="btn-icon" aria-label="Open shopping cart drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="21" r="1"/>
+              <circle cx="19" cy="21" r="1"/>
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+            </svg>
+          </button>
+          <div id="cartBadge" class="cart-count" style="display: none;">0</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Storefront Application -->
+  <main class="container">
+    
+    <!-- Split Hero Banner (Professional Layout) -->
+    <section class="hero-section">
+      <div class="hero-split-grid">
+        <div class="hero-text-side">
+          <span class="hero-tag">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+              <polyline points="16 7 22 7 22 13"/>
+            </svg>
+            Certified Laboratory Procurement
+          </span>
+          <h1>Professional Lab Materials, Ready for Procurement</h1>
+          <p>Nexura Labs supplies verified reagents, Class-A glassware, safety apparel, consumables, and ISO-aligned laboratory instruments for academic and pharmaceutical facilities.</p>
+          
+          <div class="hero-stats-row">
+            <div class="hero-stat-card">
+              <h4>99.98%</h4>
+              <p>Purity Guarantee</p>
+            </div>
+            <div class="hero-stat-card">
+              <h4>24/48h</h4>
+              <p>Priority Dispatch</p>
+            </div>
+            <div class="hero-stat-card">
+              <h4>100%</h4>
+              <p>SDS Traceable</p>
+            </div>
+          </div>
+
+          <div class="hero-buttons">
+            <a href="#catalogAnchor" class="btn btn-primary">
+              Explore Product Catalog
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </a>
+            <a href="#procurementAnchor" class="btn btn-secondary">
+              B2B Accounts & POs
+            </a>
+          </div>
+        </div>
+        <div class="hero-img-side">
+          <div class="hero-image-frame">
+            <img src="hero_banner.png" alt="Nexura Labs product display with laboratory materials and scientific equipment">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Institutional Partners Trust Bar -->
+    <section class="trust-bar">
+      <span>Contract Supplier to Major Institutions:</span>
+      <div class="trust-partners-grid">
+        <span>MIT Chemistry Department</span>
+        <span>Stanford Bio-X Lab</span>
+        <span>NIH Research Center</span>
+        <span>Harvard Medical School</span>
+        <span>Max Planck Institute</span>
+      </div>
+    </section>
+
+    <!-- Anchor for navigation -->
+    <div id="catalogAnchor" style="scroll-margin-top: 100px;"></div>
+
+    <!-- Store Layout -->
+    <section class="shop-layout">
+      <!-- Sidebar Filters -->
+      <aside class="sidebar glass-panel" style="padding: 24px;">
+        <div class="filter-section">
+          <h3>Categories</h3>
+          <ul class="category-list" id="categoryList">
+            <li class="category-item active" data-category="All">
+              <button type="button">All Categories <span class="category-count" id="count-All">9</span></button>
+            </li>
+            <li class="category-item" data-category="Chemicals">
+              <button type="button">Chemicals & Reagents <span class="category-count" id="count-Chemicals">2</span></button>
+            </li>
+            <li class="category-item" data-category="Labware">
+              <button type="button">Glassware & Flasks <span class="category-count" id="count-Labware">2</span></button>
+            </li>
+            <li class="category-item" data-category="Equipment">
+              <button type="button">Lab Equipment <span class="category-count" id="count-Equipment">2</span></button>
+            </li>
+            <li class="category-item" data-category="Safety Gear">
+              <button type="button">Safety Apparel <span class="category-count" id="count-Safety">2</span></button>
+            </li>
+            <li class="category-item" data-category="Consumables">
+              <button type="button">Filters & Consumables <span class="category-count" id="count-Consumables">1</span></button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="filter-section">
+          <h3>GHS Safety Classification</h3>
+          <div class="filter-options">
+            <label class="checkbox-label">
+              <input type="checkbox" class="hazard-filter" value="flammable"> Flammable (Class 3)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" class="hazard-filter" value="corrosive"> Corrosive (Class 8)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" class="hazard-filter" value="irritant"> General Irritant
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <h3>Inventory Availability</h3>
+          <div class="filter-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="inStockFilter"> Exclude Out of Stock
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products Display -->
+      <div class="catalog-content">
+        <div class="catalog-header">
+          <div class="catalog-info" id="catalogInfo">Showing all 9 products</div>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <label for="sortBySelect" style="font-size: 0.9rem; color: var(--text-secondary);">Sort By:</label>
+            <select id="sortBySelect" class="glass-panel" style="padding: 6px 12px; border-radius: var(--border-radius-sm); font-size: 0.9rem; color: var(--text-primary); background: var(--bg-tertiary); border: 1px solid var(--border-color); outline: none;">
+              <option value="featured">Compliance Standard</option>
+              <option value="price-low">Requisition Cost: Low-High</option>
+              <option value="price-high">Requisition Cost: High-Low</option>
+              <option value="rating">Institutional Popularity</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products Catalog Grid -->
+        <div class="products-grid" id="productsGrid">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- B2B Procurement and Requisition Information Banner -->
+    <div id="procurementAnchor" style="scroll-margin-top: 100px;"></div>
+    <section class="procurement-section glass-panel">
+      <div class="procurement-grid">
+        <div class="procurement-text">
+          <h3>Enterprise B2B Procurement Portal</h3>
+          <p>Nexura Labs supports automated procurement networks including SciQuest, Coupa, and Jaggaer. Register your facility to enable net-30 terms, corporate pricing grids, and custom batch sizes.</p>
+          <div class="procurement-bullets">
+            <div>
+              <strong>✔ Net-30 Account Billing</strong>
+              <p>Submit orders using institutional Purchase Order numbers without upfront charges.</p>
+            </div>
+            <div>
+              <strong>✔ Hazmat Transport Logistics</strong>
+              <p>Coordinated shipping for controlled laboratory materials and temperature-sensitive supplies.</p>
+            </div>
+            <div>
+              <strong>✔ Regulatory Audit Trail</strong>
+              <p>Automatically generated hazard safety declarations and digital GHS packing sheets.</p>
+            </div>
+          </div>
+        </div>
+        <div class="procurement-actions-card bg-tertiary">
+          <h4>Open a Facility Account</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">Connect your procurement platform for direct invoice reconciliation.</p>
+          <button type="button" class="btn btn-primary" style="width: 100%;" onclick="alert('Procurement registration portal currently offline for maintenance. Please email institutional requests to procurement@nexuralabs.com')">
+            Register Institution
+          </button>
+          <a href="mailto:procurement@nexuralabs.com" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+            Request Bulk Quote
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety MSDS Search Engine Section -->
+    <section class="compliance-section">
+      <div class="compliance-header">
+        <h2>Regulatory Safety Data Sheets (SDS)</h2>
+        <p>Search and download safety documentation for applicable catalog materials and lab inventory records.</p>
+      </div>
+
+      <div class="sds-search">
+        <search class="search-box" style="max-width: 100%; margin: 0;">
+          <label for="sdsSearchInput" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Search SDS Database by chemical name or CAS...</label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input type="search" id="sdsSearchInput" placeholder="Enter CAS number, product name, or formula...">
+        </search>
+      </div>
+
+      <div class="sds-grid" id="sdsGrid">
+        <!-- Populated by app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <div class="logo" style="margin-bottom: 16px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 3h15" />
+            <path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3" />
+            <path d="M6 14h12" />
+          </svg>
+          <span>Nexura Labs</span>
+        </div>
+        <p>Nexura Labs is a research supplier providing verified reagents, specialized glassware, lab safety materials, consumables, and scientific measurement instruments.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Product Catalog</h4>
+        <ul>
+          <li><a href="#catalogAnchor">Chemicals & Reagents</a></li>
+          <li><a href="#catalogAnchor">Class-A Glassware</a></li>
+          <li><a href="#catalogAnchor">Instruments & Equipment</a></li>
+          <li><a href="#catalogAnchor">Laboratory Safety Gear</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Compliance & Safety</h4>
+        <ul>
+          <li><a href="#sdsSearchInput">MSDS/SDS Database</a></li>
+          <li><a href="#">OSHA GHS Guidelines</a></li>
+          <li><a href="#">Chemical Hazard Matrices</a></li>
+          <li><a href="#">Shipping Regulations</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact & Orders</h4>
+        <ul>
+          <li>Email: <a href="mailto:support@nexuralabs.com">support@nexuralabs.com</a></li>
+          <li>Phone: +1 (800) 555-0199</li>
+          <li>Address: Tech District, Boston, MA</li>
+          <li>B2B Purchase orders accepted</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Nexura Labs Inc. All rights reserved. For research and development use only.</p>
+      <p>ISO 9001:2015 Registered • NIH/NSF Registered Vendor</p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+     Cart Sliding Drawer Interface
+     ========================================================================== -->
+  <div class="cart-overlay" id="cartOverlay" role="presentation"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="cart-header">
+      <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="8" cy="21" r="1"/>
+          <circle cx="19" cy="21" r="1"/>
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+        </svg>
+        Requisition cart
+      </h2>
+      <button id="cartCloseBtn" class="btn-icon cart-close-btn" aria-label="Close shopping cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-body">
+      <!-- Incompatible chemical combination warning box -->
+      <div class="cart-warnings" id="cartWarnings">
+        <!-- Incompatibility warnings populated here by app.js -->
+      </div>
+
+      <!-- Items List -->
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Populated by app.js -->
+      </div>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="cart-footer">
+      <div class="cart-summary-row">
+        <span>Order Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Hazmat Logistics Courier</span>
+        <span id="cartShipping">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Sales Tax (8.25%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="cart-summary-row cart-summary-total">
+        <span>Total Due (Net 30)</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+
+      <!-- Promo Code Section -->
+      <div class="promo-section">
+        <input type="text" id="promoInput" placeholder="Discount Code (NEXURA10)">
+        <button type="button" id="promoApplyBtn" class="btn btn-secondary" style="padding: 8px 16px;">Apply</button>
+      </div>
+
+      <button type="button" id="checkoutBtn" class="btn btn-primary cart-checkout-btn">
+        Proceed to Checkout
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+     Native Modals (<dialog>)
+     ========================================================================== -->
+  
+  <!-- 1. Product Details Dialog -->
+  <dialog id="productDialog">
+    <div class="modal-header">
+      <h2 id="modalProductName">Chemical Name</h2>
+      <button type="button" id="productDialogCloseBtn" class="btn-icon modal-close-btn" aria-label="Close details dialog">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-product-layout">
+        <div>
+          <div class="modal-product-image" id="modalProductImg"></div>
+          <div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;" id="modalProductBadges">
+            <!-- Badges -->
+          </div>
+        </div>
+        <div class="modal-product-meta">
+          <div class="modal-product-formula" id="modalProductFormula">Formula</div>
+          <p id="modalProductDesc" style="color: var(--text-secondary); margin-top: 8px;">Detailed description here...</p>
+          
+          <table class="modal-product-specs-table">
+            <tbody id="modalProductSpecsBody">
+              <!-- Specs rows -->
+            </tbody>
+          </table>
+
+          <div class="modal-product-safety" id="modalProductSafety">
+            <strong>Safety Protocol:</strong> <span id="modalProductSafetyText">Safety details</span>
+          </div>
+
+          <div class="modal-product-actions">
+            <div>
+              <span id="modalProductPrice" style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary); font-family: var(--font-heading);">$0.00</span>
+              <span id="modalProductUnit" style="color: var(--text-secondary); font-size: 0.9rem;">/ bottle</span>
+            </div>
+            <button type="button" id="modalAddToCartBtn" class="btn btn-primary" style="flex: 1;">
+              Add to Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 2. Secure Checkout Dialog -->
+  <dialog id="checkoutDialog">
+    <div class="modal-header">
+      <h2>Secure Checkout Terminal</h2>
+      <button type="button" id="checkoutDialogCloseBtn" class="btn-icon modal-close-btn" aria-label="Close checkout dialog">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="checkout-form" id="checkoutForm">
+        <div class="checkout-totals">
+          <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; color: var(--text-primary);">
+            <span>Order Total:</span>
+            <span id="checkoutOrderTotal" style="color: var(--color-primary);">$0.00</span>
+          </div>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="checkoutFirstName">First Name</label>
+            <input type="text" id="checkoutFirstName" autocomplete="given-name" required placeholder="John">
+          </div>
+          <div class="form-group">
+            <label for="checkoutLastName">Last Name</label>
+            <input type="text" id="checkoutLastName" autocomplete="family-name" required placeholder="Doe">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="checkoutInstitution">Institution / Company Name</label>
+          <input type="text" id="checkoutInstitution" autocomplete="organization" required placeholder="Harvard Medical School, Dept of Chemistry">
+        </div>
+
+        <div class="form-group">
+          <label for="checkoutEmail">Institutional Email Address</label>
+          <input type="email" id="checkoutEmail" autocomplete="email" required placeholder="j.doe@university.edu">
+        </div>
+
+        <div class="form-group">
+          <label for="checkoutAddress">Delivery Address (Lab / Facility)</label>
+          <input type="text" id="checkoutAddress" autocomplete="street-address" required placeholder="100 Tech Blvd, Room 402B">
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="checkoutCity">City</label>
+            <input type="text" id="checkoutCity" autocomplete="address-level2" required placeholder="Boston">
+          </div>
+          <div class="form-group">
+            <label for="checkoutZip">Postal Code</label>
+            <input type="text" id="checkoutZip" autocomplete="postal-code" required placeholder="02115">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="checkoutPayment">Payment Method</label>
+          <select id="checkoutPayment" required>
+            <option value="po">Institutional Purchase Order (PO Number)</option>
+            <option value="card">Corporate Credit Card</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="poFieldGroup">
+          <label for="checkoutPO">Purchase Order (PO) Number</label>
+          <input type="text" id="checkoutPO" placeholder="PO-2026-88910" required>
+        </div>
+
+        <div class="form-group" id="cardFieldGroup" style="display: none;">
+          <label for="checkoutCard">Corporate Credit Card Number</label>
+          <input type="text" id="checkoutCard" placeholder="4111 2222 3333 4444" autocomplete="cc-number">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px; height: 50px;">
+          Submit Purchase Order & Authorize Shipment
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- 3. Success Confirmation Dialog -->
+  <dialog id="successDialog">
+    <div class="modal-body success-modal">
+      <div class="success-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <h2 class="success-title">Order Requisition Authorized</h2>
+      <p class="success-message">Your institutional purchase order has been processed. A notification and packing sheet have been sent to your registered email address.</p>
+
+      <div class="invoice-preview" id="invoicePreview">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div style="display: flex; gap: 16px; justify-content: center;">
+        <button type="button" id="successDownloadInvoiceBtn" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Print Packing Sheet
+        </button>
+        <button type="button" id="successCloseBtn" class="btn btn-primary">
+          Return to Storefront
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Scripts -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
