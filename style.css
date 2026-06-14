@@ -712,25 +712,6 @@ body.light-theme .hero-text-side h1 {
   gap: 6px;
 }
 
-.product-hazards {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  display: flex;
-  gap: 6px;
-}
-
-.hazard-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.hazard-dot.flammable { background: var(--color-warning); box-shadow: 0 0 8px var(--color-warning); }
-.hazard-dot.corrosive { background: var(--color-danger); box-shadow: 0 0 8px var(--color-danger); }
-.hazard-dot.toxic { background: var(--color-secondary); box-shadow: 0 0 8px var(--color-secondary); }
-.hazard-dot.irritant { background: #c7773d; box-shadow: 0 0 8px rgba(199, 119, 61, 0.35); }
-
 .product-info {
   flex-grow: 1;
   display: flex;
@@ -1459,7 +1440,7 @@ dialog.modal-closing {
 }
 
 /* ==========================================================================
-   11. MSDS / Safety Compliance Section
+   11. Product Documentation Section
    ========================================================================== */
 .compliance-section {
   margin-top: 80px;
@@ -1484,25 +1465,25 @@ dialog.modal-closing {
   margin: 0 auto;
 }
 
-.sds-search {
+.docs-search {
   max-width: 600px;
   margin: 0 auto 40px auto;
 }
 
-.sds-grid {
+.docs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
-.sds-card {
+.docs-card {
   padding: 20px;
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.sds-icon {
+.docs-icon {
   background: rgba(239, 68, 68, 0.1);
   color: var(--color-danger);
   width: 46px;
@@ -1513,26 +1494,26 @@ dialog.modal-closing {
   justify-content: center;
 }
 
-.sds-info {
+.docs-info {
   flex: 1;
 }
 
-.sds-info h4 {
+.docs-info h4 {
   font-size: 0.95rem;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
-.sds-info p {
+.docs-info p {
   font-size: 0.8rem;
   color: var(--text-secondary);
 }
 
-.sds-download-btn {
+.docs-download-btn {
   color: var(--text-secondary);
 }
 
-.sds-download-btn:hover {
+.docs-download-btn:hover {
   color: var(--color-primary);
 }
 

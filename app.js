@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let cart = [];
   let activeCategory = 'All';
   let searchQuery = '';
-  let sdsQuery = '';
-  let activeHazards = [];
+  let docsQuery = '';
   let inStockOnly = false;
   let sortBy = 'featured';
   let appliedDiscount = 0; // 0.1 means 10% off
@@ -15,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsGrid = document.getElementById('productsGrid');
   const categoryList = document.getElementById('categoryList');
   const searchInput = document.getElementById('searchInput');
-  const sdsSearchInput = document.getElementById('sdsSearchInput');
-  const sdsGrid = document.getElementById('sdsGrid');
+  const docsSearchInput = document.getElementById('docsSearchInput');
+  const docsGrid = document.getElementById('docsGrid');
   const catalogInfo = document.getElementById('catalogInfo');
   const sortBySelect = document.getElementById('sortBySelect');
   
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCategoryCounts();
     renderProducts();
     renderCart();
-    renderSds();
+    renderDocs();
   }
 
   // ==========================================================================
@@ -95,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
       renderProducts();
     });
 
-    // SDS Search Event
-    sdsSearchInput.addEventListener('input', (e) => {
-      sdsQuery = e.target.value.toLowerCase().trim();
-      renderSds();
+    // Documentation Search Event
+    docsSearchInput.addEventListener('input', (e) => {
+      docsQuery = e.target.value.toLowerCase().trim();
+      renderDocs();
     });
 
     // Category Filter Clicks
@@ -116,19 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sortBySelect.addEventListener('change', (e) => {
       sortBy = e.target.value;
       renderProducts();
-    });
-
-    // Hazard Filter Checkboxes
-    document.querySelectorAll('.hazard-filter').forEach(checkbox => {
-      checkbox.addEventListener('change', (e) => {
-        const value = e.target.value;
-        if (e.target.checked) {
-          activeHazards.push(value);
-        } else {
-          activeHazards = activeHazards.filter(h => h !== value);
-        }
-        renderProducts();
-      });
     });
 
     // In Stock Only Checkbox
@@ -216,21 +202,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
       }
 
-      // Search Match (name, CAS, formula, description)
+      // Search Match (name, tier, unit, description)
       if (searchQuery) {
         const nameMatch = prod.name.toLowerCase().includes(searchQuery);
-        const casMatch = prod.cas.toLowerCase().includes(searchQuery);
-        const formulaMatch = prod.formula.toLowerCase().includes(searchQuery);
+        const tierMatch = prod.category.toLowerCase().includes(searchQuery) || prod.grade.toLowerCase().includes(searchQuery);
+        const unitMatch = prod.unit.toLowerCase().includes(searchQuery);
         const descMatch = prod.description.toLowerCase().includes(searchQuery);
-        if (!nameMatch && !casMatch && !formulaMatch && !descMatch) {
+        if (!nameMatch && !tierMatch && !unitMatch && !descMatch) {
           return false;
         }
-      }
-
-      // Hazard Match (Must possess ALL checked hazards)
-      if (activeHazards.length > 0) {
-        const hasAllHazards = activeHazards.every(h => prod.hazards.includes(h));
-        if (!hasAllHazards) return false;
       }
 
       // Stock Match
@@ -259,19 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.5;">
             <circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>
           </svg>
-          <h3>No chemical reagents or materials matched your filters.</h3>
-          <p style="margin-top: 8px;">Try clearing search keywords or unchecking hazard properties.</p>
+          <h3>No kits or supplies matched your filters.</h3>
+          <p style="margin-top: 8px;">Try clearing search keywords or choosing another price tier.</p>
         </div>
       `;
       return;
     }
 
     productsGrid.innerHTML = filtered.map(prod => {
-      const hazardDots = prod.hazards
-        .filter(h => h !== 'none')
-        .map(h => `<span class="hazard-dot ${h}" title="Hazard: ${h}"></span>`)
-        .join('');
-
       const ratingStars = '★'.repeat(Math.round(prod.rating)) + '☆'.repeat(5 - Math.round(prod.rating));
       const inStockBadge = prod.inStock > 0 
         ? `<span class="badge badge-green">In Stock</span>`
@@ -302,9 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="product-badges">
               <span class="badge badge-cyan">${prod.grade}</span>
               ${inStockBadge}
-            </div>
-            <div class="product-hazards">
-              ${hazardDots}
             </div>
           </div>
           <div class="product-info">
@@ -365,11 +337,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateCategoryCounts() {
     const counts = {
       All: PRODUCTS.length,
-      Chemicals: 0,
-      Labware: 0,
-      Equipment: 0,
-      'Safety Gear': 0,
-      Consumables: 0
+      'Entry Tier': 0,
+      'Core Tier': 0,
+      'Popular Tier': 0,
+      'Premium Tier': 0
     };
 
     PRODUCTS.forEach(p => {
@@ -379,11 +350,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('count-All').textContent = counts.All;
-    document.getElementById('count-Chemicals').textContent = counts.Chemicals;
-    document.getElementById('count-Labware').textContent = counts.Labware;
-    document.getElementById('count-Equipment').textContent = counts.Equipment;
-    document.getElementById('count-Safety').textContent = counts['Safety Gear'];
-    document.getElementById('count-Consumables').textContent = counts.Consumables;
+    document.getElementById('count-Entry').textContent = counts['Entry Tier'];
+    document.getElementById('count-Core').textContent = counts['Core Tier'];
+    document.getElementById('count-Popular').textContent = counts['Popular Tier'];
+    document.getElementById('count-Premium').textContent = counts['Premium Tier'];
   }
 
   // ==========================================================================
@@ -527,22 +497,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
 
     // 3. Incompatibilities Check
-    checkChemicalIncompatibilities();
+    checkProductCompatibility();
 
     // 4. Financial Calculations
     let subtotal = 0;
-    let hasHazardousMaterial = false;
-    let hazCount = 0;
+    let hasSpecialHandling = false;
+    let specialHandlingCount = 0;
 
     cart.forEach(item => {
       const prod = PRODUCTS.find(p => p.id === item.productId);
       subtotal += prod.price * item.quantity;
 
-      // Check if product is flammable, toxic, or corrosive
-      if (prod.hazards.includes('flammable') || prod.hazards.includes('corrosive') || prod.hazards.includes('toxic')) {
-        hasHazardousMaterial = true;
-        hazCount += item.quantity;
-      }
     });
 
     // Subtotal Discount
@@ -550,11 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
       subtotal = subtotal * (1 - appliedDiscount);
     }
 
-    // Hazardous Material Courier Surcharge ($12.50 per chemical container, max $37.50)
     let shippingFee = 8.50; // Standard base shipping
-    if (hasHazardousMaterial) {
-      shippingFee += Math.min(hazCount * 12.50, 37.50);
-    }
 
     const taxRate = 0.0825; // 8.25%
     const taxes = subtotal * taxRate;
@@ -562,17 +523,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update DOM
     cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-    cartShipping.textContent = `$${shippingFee.toFixed(2)} ${hasHazardousMaterial ? '(HAZMAT Surcharge Applied)' : ''}`;
+    cartShipping.textContent = `$${shippingFee.toFixed(2)}`;
     cartTax.textContent = `$${taxes.toFixed(2)}`;
     cartTotal.textContent = `$${finalTotal.toFixed(2)}`;
   }
 
-  // Chemical Compatibility Checker
-  function checkChemicalIncompatibilities() {
+  // Compatibility checker placeholder for future product-specific rules.
+  function checkProductCompatibility() {
     cartWarnings.innerHTML = '';
     const cartProductIds = cart.map(item => item.productId);
 
-    CHEMICAL_COMPATIBILITY_WARNINGS.forEach(warn => {
+    PRODUCT_COMPATIBILITY_WARNINGS.forEach(warn => {
       const hasGroupA = warn.groupA.some(id => cartProductIds.includes(id));
       const hasGroupB = warn.groupB.some(id => cartProductIds.includes(id));
 
@@ -621,14 +582,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('modalProductImg').innerHTML = `<img src="${prod.image}" alt="${prod.name}">`;
 
-    // Hazards symbols
     const badgesContainer = document.getElementById('modalProductBadges');
     badgesContainer.innerHTML = `<span class="badge badge-cyan">${prod.grade}</span>`;
-    prod.hazards.forEach(h => {
-      if (h !== 'none') {
-        badgesContainer.innerHTML += `<span class="badge badge-danger">${h}</span>`;
-      }
-    });
 
     // Specifications Table
     const specsBody = document.getElementById('modalProductSpecsBody');
@@ -754,34 +709,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 9. SDS Compliance Panel rendering
+  // 9. Product Documentation Panel rendering
   // ==========================================================================
-  function renderSds() {
-    const matchedSds = PRODUCTS.filter(prod => {
-      if (prod.category !== 'Chemicals') return false;
-
-      if (sdsQuery) {
-        const nameMatch = prod.name.toLowerCase().includes(sdsQuery);
-        const casMatch = prod.cas.toLowerCase().includes(sdsQuery);
-        const formulaMatch = prod.formula.toLowerCase().includes(sdsQuery);
-        return nameMatch || casMatch || formulaMatch;
+  function renderDocs() {
+    const matchedDocs = PRODUCTS.filter(prod => {
+      if (docsQuery) {
+        const nameMatch = prod.name.toLowerCase().includes(docsQuery);
+        const categoryMatch = prod.category.toLowerCase().includes(docsQuery);
+        const gradeMatch = prod.grade.toLowerCase().includes(docsQuery);
+        return nameMatch || categoryMatch || gradeMatch;
       }
       return true;
     });
 
-    if (matchedSds.length === 0) {
-      sdsGrid.innerHTML = `
+    if (matchedDocs.length === 0) {
+      docsGrid.innerHTML = `
         <div class="glass-panel" style="grid-column: 1/-1; padding: 20px; text-align: center; color: var(--text-secondary);">
-          No SDS documents match your search query.
+          No product documents match your search query.
         </div>
       `;
       return;
     }
 
-    sdsGrid.innerHTML = matchedSds.map(prod => {
+    docsGrid.innerHTML = matchedDocs.map(prod => {
       return `
-        <div class="glass-panel sds-card">
-          <div class="sds-icon">
+        <div class="glass-panel docs-card">
+          <div class="docs-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
               <polyline points="14 2 14 8 20 8" />
@@ -789,11 +742,11 @@ document.addEventListener('DOMContentLoaded', () => {
               <path d="m9 15 3 3 3-3" />
             </svg>
           </div>
-          <div class="sds-info">
+          <div class="docs-info">
             <h4>${prod.name.split(',')[0]}</h4>
-            <p>CAS: ${prod.cas} | ${prod.formula}</p>
+            <p>${prod.category} | ${prod.grade}</p>
           </div>
-          <button type="button" class="sds-download-btn" onclick="downloadSds('${prod.name}', '${prod.cas}')" aria-label="Download Safety Data Sheet for ${prod.name}">
+          <button type="button" class="docs-download-btn" onclick="downloadProductDoc('${prod.id}')" aria-label="Download product reference for ${prod.name}">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
@@ -805,44 +758,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
   }
 
-  // Mock SDS file generation & download trigger
-  window.downloadSds = function(chemicalName, casNum) {
-    const sdsContent = `========================================================================
-MATERIAL SAFETY DATA SHEET (MSDS / GHS SDS)
-Nexura Labs Compliance System
+  window.downloadProductDoc = function(productId) {
+    const prod = PRODUCTS.find(p => p.id === productId);
+    if (!prod) return;
+
+    const docContent = `========================================================================
+NEXURA LABS MATERIALS PRODUCT REFERENCE
 ========================================================================
-SECTION 1: IDENTIFICATION OF THE SUBSTANCE AND COMPANY
-Product Name: ${chemicalName}
-CAS Number: ${casNum}
-Manufacturer: Nexura Labs Inc., Tech District, Boston, MA
-Emergency Hotline: +1 (800) 555-0199
+Product Name: ${prod.name}
+Category: ${prod.category}
+Configuration: ${prod.grade}
+Unit: ${prod.unit}
+Price: $${prod.price.toFixed(2)}
 
-SECTION 2: HAZARDS IDENTIFICATION
-Classification: GHS Label elements including safety precautions.
-Refer to chemical specification cards for specific flammability, toxicity, 
-or corrosiveness profiles.
+DESCRIPTION
+${prod.longDescription}
 
-SECTION 3: COMPOSITION / INFORMATION ON INGREDIENTS
-Ingredient: ${chemicalName} (Purity >99.0%)
+SPECIFICATIONS
+${Object.entries(prod.specs).map(([key, value]) => `${key}: ${value}`).join('\n')}
 
-SECTION 4: FIRST AID MEASURES
-Eyes: Flush with copious amounts of water for 15 minutes. Seek medical aid.
-Skin: Flush skin immediately. Remove contaminated clothing.
-Ingestion: Do not induce vomiting. Call poison control immediately.
-
-SECTION 5: ACCIDENTAL RELEASE MEASURES
-Evacuate area. Absorb or sweep up with inert absorbent. Wear full protective 
-clothing and SCBA if vapor levels are high.
+USE NOTES
+${prod.safetyPrecautions}
 
 ========================================================================
-Generated by Nexura GHS Regulatory Automation Engine. Date: ${new Date().toLocaleDateString()}
+Generated by Nexura Labs Materials. Date: ${new Date().toLocaleDateString()}
 ========================================================================`;
 
-    const blob = new Blob([sdsContent], { type: 'text/plain' });
+    const blob = new Blob([docContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `SDS_${casNum.replace(/-/g, '_')}_Nexura.txt`;
+    a.download = `${prod.id}_product_reference.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
