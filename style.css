@@ -1673,3 +1673,151 @@ dialog.modal-closing {
     gap: 20px;
   }
 }
+
+/* ==========================================================================
+   15. Compliance and App Utility Pages
+   ========================================================================== */
+.simple-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.simple-header {
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.simple-nav {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.simple-nav-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.simple-nav-links a:hover {
+  color: var(--color-primary);
+}
+
+.simple-main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+
+.simple-hero {
+  margin-bottom: 28px;
+}
+
+.simple-eyebrow {
+  display: inline-flex;
+  color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.1);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.18);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+
+.simple-hero h1 {
+  font-size: 2.4rem;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.simple-hero p {
+  color: var(--text-secondary);
+  max-width: 760px;
+}
+
+.simple-panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  padding: 32px;
+}
+
+.simple-panel h2 {
+  font-size: 1.35rem;
+  margin: 30px 0 10px;
+}
+
+.simple-panel h2:first-child {
+  margin-top: 0;
+}
+
+.simple-panel p,
+.simple-panel li {
+  color: var(--text-secondary);
+}
+
+.simple-panel ul,
+.simple-panel ol {
+  padding-left: 22px;
+  margin: 10px 0 18px;
+}
+
+.simple-panel li {
+  margin-bottom: 8px;
+}
+
+.simple-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.status-card {
+  display: grid;
+  gap: 12px;
+  max-width: 680px;
+}
+
+.status-card strong {
+  color: var(--text-primary);
+}
+
+.status-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 12px;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .simple-nav {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px 0;
+  }
+
+  .simple-nav-links {
+    flex-wrap: wrap;
+  }
+
+  .simple-hero h1 {
+    font-size: 2rem;
+  }
+
+  .simple-panel {
+    padding: 24px;
+  }
+}
