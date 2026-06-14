@@ -270,10 +270,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `<div class="product-specs-summary">${specsHtml}</div>` 
         : '';
 
+      const tierClass = prod.category.toLowerCase().replace(/\s+/g, '-');
+      const productIndex = filtered.indexOf(prod);
+
       return `
-        <article class="glass-panel product-card">
+        <article class="glass-panel product-card tier-${tierClass}" style="--card-index: ${productIndex};">
           <div class="product-image-container">
             <img class="product-image" src="${prod.image}" alt="${prod.name}">
+            <div class="product-image-sheen" aria-hidden="true"></div>
             <div class="product-badges">
               <span class="badge badge-cyan">${prod.grade}</span>
               ${inStockBadge}
